@@ -1,49 +1,55 @@
 # PHARN Dev
 
-**Ship it right. See what's running.**
+**Know if an agent's PR is safe to merge.**
 
-We build open-source developer tools in two areas: shipping features with AI agents (PHARN) and seeing what a Node.js app is doing (Phargus).
+We build the floor for AI-assisted development. The main product is **pharn-ci** — one CI check that tells a team whether an agent's pull request is safe to merge.
 
-## Our projects
+## Main product
+
+### [pharn-ci](https://github.com/pharn-dev/pharn-ci) — One CI check for agent PRs
+
+Agents write diffs faster than people can review them. pharn-ci runs on every pull request and answers the cheap, mechanical questions before a human opens it:
+
+- Did the tests actually execute the new code? (diff coverage)
+- Does the repository tell agents how to work in it? (agent setup inventory)
+- Did someone skip, delete, or weaken tests? (test integrity)
+
+One GitHub Action. One PR comment. One status check. AI-agnostic. Deterministic. Source code never leaves your CI.
+
+```yaml
+- uses: pharn-dev/pharn-ci@v0
+```
+
+[pharn-ci](https://github.com/pharn-dev/pharn-ci) · [pharn.dev](https://pharn.dev)
+
+## Open-source methodology
 
 ### [PHARN](https://github.com/pharn-dev/pharn-oss) — Ship features right with AI agents
 
-Describe a feature and PHARN plans, builds and verifies it. The spec, plan and checks stay in your repo, so months later you can still answer "why was it done this way?"
-
-PHARN is an open-source workflow for Claude Code. A feature moves through spec, plan, test, build and verify, and each step leaves readable Markdown next to your code.
-
-- **Built to ship right:** every acceptance criterion gets a test that must fail before any code exists, and deterministic checks run on the result. Model review stays advisory.
-- **Keep the trail in Git:** readable Markdown and machine-readable run records.
-- **Choose your workflow:** run individual stages or an unattended local implementation loop.
+The open-source methodology that keeps the reasoning next to the code. Spec, plan, and checks stay in Git, so months later you can still answer what was asked, what was checked, and what was only the model's opinion.
 
 ```bash
 npx @pharn-dev/pharn@latest init
 ```
 
-[Explore PHARN](https://github.com/pharn-dev/pharn-oss) · [CLI and installation](https://github.com/pharn-dev/pharn-cli)
+[pharn-oss](https://github.com/pharn-dev/pharn-oss) · [pharn-cli](https://github.com/pharn-dev/pharn-cli)
+
+## Runtime diagnostics
 
 ### [Phargus](https://github.com/pharn-dev/phargus) — See what's running in your Node.js app
 
-Phargus is for a quick look at a live Node.js process: one line, in-process, no account.
-
-Its zero-external-dependency agent captures **event loop delay, memory usage, garbage collection, stream backpressure, and HTTP request traces** and writes them as NDJSON. An optional collector and dashboard, shipped in the same package, turn that into time windows, alerts and a live page in your browser.
-
-- **Inspect a running process:** find performance signals and request-level context.
-- **No account, no backend:** collect data locally and view it in your browser.
-- **Integrate when useful:** export metrics and traces through OpenTelemetry.
-
-**Status:** Pre-release. Phargus can be built and tried from source; it is not yet published to npm.
+Lightweight, zero-dependency runtime diagnostics for Node.js. Event loop lag, memory, GC, HTTP requests, and stream backpressure. No account required.
 
 [Explore Phargus](https://github.com/pharn-dev/phargus)
 
 ## Ecosystem
 
-- **[pharn-cli](https://github.com/pharn-dev/pharn-cli):** install and update PHARN in existing projects.
-- **[skills](https://github.com/pharn-dev/skills):** Claude Code plugin marketplace that keeps a project's PHARN installation current and adds Node.js runtime diagnosis with Phargus (Phargus also on Codex).
+- **[skills](https://github.com/pharn-dev/skills):** Claude Code skills for Pharn and Phargus.
+- **[pharn-cli](https://github.com/pharn-dev/pharn-cli):** Install and update PHARN in existing projects.
 
 ## Our approach
 
-We favor behavior you can read over black boxes, claims you can check over claims you have to trust, and tools that fit the workflow you already have.
+We favor behavior you can read over black boxes, claims you can check over claims you have to trust, and tools that fit the workflow you already have. The floor is only as strong as the cases it refuses to guess on.
 
 ## Get involved
 
